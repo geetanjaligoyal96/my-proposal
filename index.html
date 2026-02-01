@@ -5,47 +5,42 @@
 <title>Be Mine Forever 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --blush: #f8cdda;
+  --rose: #d88fa3;
+  --gold: #e6c98f;
+  --white: #ffffff;
+}
+
 body {
-  font-family: 'Poppins', sans-serif;
-  background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
-  height: 100vh;
   margin: 0;
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--blush), var(--rose));
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
+  color: var(--white);
   overflow: hidden;
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  font-size: 20px;
-  opacity: 0.6;
-  animation: floatUp 6s infinite ease-in;
-}
-@keyframes floatUp {
-  0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
-  50% { opacity: 0.9; }
-  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
 
 /* Card */
 .card {
   background: rgba(255,255,255,0.18);
   backdrop-filter: blur(14px);
-  padding: 38px 32px;
-  border-radius: 28px;
+  border-radius: 30px;
+  padding: 36px 30px;
   max-width: 360px;
-  box-shadow: 0 25px 50px rgba(0,0,0,0.35);
   text-align: center;
-  animation: fadeIn 1.5s ease;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  animation: fadeUp 1.6s ease;
 }
 
-@keyframes fadeIn {
+@keyframes fadeUp {
   from { opacity: 0; transform: translateY(25px); }
   to { opacity: 1; transform: translateY(0); }
 }
@@ -53,82 +48,128 @@ body {
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 30px;
-  margin-bottom: 18px;
+  margin-bottom: 14px;
+  color: #fffaf0;
 }
 
-p {
+.message {
   font-size: 16px;
   line-height: 1.7;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+}
+
+/* Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.carousel img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: none;
+}
+.carousel img.active {
+  display: block;
+  animation: fade 1.5s;
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Countdown */
+.countdown {
+  font-size: 15px;
+  margin-bottom: 22px;
+  color: #fff6e5;
 }
 
 /* Buttons */
 button {
-  font-size: 16px;
   padding: 12px 28px;
-  border: none;
+  font-size: 16px;
   border-radius: 40px;
+  border: none;
   cursor: pointer;
-  margin: 10px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  margin: 8px;
+  transition: transform 0.25s ease;
 }
 
 button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+  transform: scale(1.08);
 }
 
 #yes {
-  background: linear-gradient(135deg, #2ecc71, #27ae60);
-  color: white;
+  background: linear-gradient(135deg, var(--gold), #f7e7b4);
+  color: #5a3e2b;
 }
 
 #no {
-  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  background: #c75c6c;
   color: white;
   position: absolute;
 }
 
-/* Glow effect */
-.glow {
-  animation: glow 2s infinite alternate;
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: float 7s infinite ease-in;
+  opacity: 0.6;
 }
-@keyframes glow {
-  from { text-shadow: 0 0 10px #ffd6e0; }
-  to { text-shadow: 0 0 25px #ffffff; }
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-10vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body onclick="startMusic()">
 
-<!-- Floating hearts -->
-<span class="heart" style="left:5%">💖</span>
-<span class="heart" style="left:20%; animation-delay:1s">💘</span>
-<span class="heart" style="left:40%; animation-delay:2s">💕</span>
-<span class="heart" style="left:60%; animation-delay:3s">💞</span>
-<span class="heart" style="left:80%; animation-delay:4s">❤️</span>
+<!-- Hearts -->
+<span class="heart" style="left:15%">💖</span>
+<span class="heart" style="left:45%; animation-delay:2s">💗</span>
+<span class="heart" style="left:70%; animation-delay:4s">💕</span>
 
-<!-- Background Music -->
+<!-- Music -->
 <audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3a0b0c1b60.mp3" type="audio/mpeg">
 </audio>
 
 <div class="card">
-  <h1 class="glow">Hey My Love 💕</h1>
-  <p>
-    Somewhere between every laugh, every fight,
-    and every heartbeat… I found HOME in you.<br><br>
-Will you marry me and choose us, every single day? 🌹
-  </p>
+
+  <h1>My Love 💕</h1>
+
+  <!-- Carousel -->
+  <div class="carousel">
+    <img src="photo1.jpg" class="active">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+  </div>
+
+  <div class="message">
+    Somewhere between every laugh, every fight,<br>
+    and every heartbeat… I found <i>home</i> in you.<br><br>
+    Will you marry me and choose us, every single day?
+  </div>
+
+  <!-- Countdown -->
+  <div class="countdown" id="countdown"></div>
 
   <button id="yes" onclick="sayYes()">Yes, always 💍</button>
   <button id="no" onmouseover="moveNo()">No 🙈</button>
+
 </div>
 
 <script>
+/* Music */
 let musicStarted = false;
-
 function startMusic() {
   if (!musicStarted) {
     document.getElementById("bgMusic").play();
@@ -136,61 +177,51 @@ function startMusic() {
   }
 }
 
-/* YES celebration */
+/* Carousel */
+let index = 0;
+const images = document.querySelectorAll(".carousel img");
+setInterval(() => {
+  images[index].classList.remove("active");
+  index = (index + 1) % images.length;
+  images[index].classList.add("active");
+}, 3000);
+
+/* Countdown */
+const targetDate = new Date("2026-02-14").getTime(); // CHANGE DATE
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  document.getElementById("countdown").innerHTML =
+    days > 0 ? `⏳ ${days} days until our forever begins` : `💍 Today is our forever`;
+}, 1000);
+
+/* YES */
 function sayYes() {
   document.body.innerHTML = `
   <div style="
     height:100vh;
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
-    flex-direction:column;
-    background:radial-gradient(circle at top,#ff9a9e,#ff4d6d);
+    background:linear-gradient(135deg,#f8cdda,#d88fa3);
     color:white;
-    font-family:'Playfair Display', serif;
-    text-align:center;">
-    
-    <h1 style="font-size:42px;">HE SAID YES 💘🎉</h1>
-    <p style="font-family:Poppins; font-size:18px; max-width:320px;">
-      My forever begins with you 🥹❤️<br>
-      I promise to love you endlessly.
+    text-align:center;
+    font-family:'Playfair Display', serif;">
+    <h1 style="font-size:42px;">He said YES 💖✨</h1>
+    <p style="font-family:Poppins; font-size:18px; max-width:300px;">
+      My forever starts with you.<br>I love you endlessly.
     </p>
-    
-    <div id="confetti"></div>
-  </div>
-  `;
-
-  // Confetti effect
-  for (let i = 0; i < 120; i++) {
-    const confetti = document.createElement("div");
-    confetti.innerHTML = "🎉";
-    confetti.style.position = "fixed";
-    confetti.style.left = Math.random() * window.innerWidth + "px";
-    confetti.style.top = "-20px";
-    confetti.style.fontSize = "20px";
-    confetti.style.animation = "fall 3s linear";
-    document.body.appendChild(confetti);
-    setTimeout(() => confetti.remove(), 3000);
-  }
+  </div>`;
 }
 
-/* No button runs away */
+/* No button */
 function moveNo() {
-  const button = document.getElementById("no");
-  const x = Math.random() * (window.innerWidth - 140);
-  const y = Math.random() * (window.innerHeight - 80);
-  button.style.left = x + "px";
-  button.style.top = y + "px";
+  const btn = document.getElementById("no");
+  btn.style.left = Math.random() * (window.innerWidth - 140) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - 80) + "px";
 }
-
-/* Confetti animation */
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes fall {
-  from { transform: translateY(0); opacity:1; }
-  to { transform: translateY(100vh); opacity:0; }
-}`;
-document.head.appendChild(style);
 </script>
 
 </body>
