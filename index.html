@@ -12,10 +12,9 @@
 :root {
   --bg1: #f8cdda;
   --bg2: #d88fa3;
-  --card1: #fff8f3;
-  --card2: #f3c8d6;
+  --card-bg: #fff8f3;
   --gold: #e6c98f;
-  --rose: #6a3f4d;
+  --rose-text: #6a3f4d;
 }
 
 body {
@@ -26,32 +25,18 @@ body {
   justify-content: center;
   align-items: center;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  font-size: 20px;
-  opacity: 0.6;
-  animation: float 7s infinite ease-in;
-}
-@keyframes float {
-  0% { transform: translateY(100vh); opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { transform: translateY(-10vh); opacity: 0; }
 }
 
 /* Card */
 .card {
-  background: linear-gradient(145deg, var(--card1), var(--card2));
-  border-radius: 32px;
-  padding: 38px 32px;
-  width: 360px;
-  text-align: center;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-  animation: fadeUp 1.4s ease;
   position: relative;
+  background: var(--card-bg);
+  border-radius: 30px;
+  padding: 36px 28px;
+  width: 340px;
+  text-align: center;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  animation: fadeUp 1.2s ease;
 }
 
 @keyframes fadeUp {
@@ -61,63 +46,62 @@ body {
 
 h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 32px;
+  font-size: 30px;
   color: #5a3e2b;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 /* Message */
 .message {
   font-family: 'Cormorant Garamond', serif;
   font-size: 22px;
-  line-height: 1.8;
-  color: var(--rose);
-  margin-bottom: 22px;
+  line-height: 1.7;
+  color: var(--rose-text);
+  margin-bottom: 20px;
 }
 
 /* Carousel */
 .carousel {
   width: 100%;
-  height: 190px;
-  border-radius: 20px;
+  height: 180px;
+  border-radius: 18px;
   overflow: hidden;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 .carousel img {
   width: 100%;
-  height: 190px;
+  height: 180px;
   object-fit: cover;
   display: none;
 }
 .carousel img.active {
   display: block;
-  animation: fade 1.2s;
-}
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 /* Countdown */
 .countdown {
   font-size: 14px;
-  color: #7a4f5d;
-  margin-bottom: 22px;
+  color: #8b5c6b;
+  margin-bottom: 18px;
 }
 
 /* Buttons */
 .buttons {
   position: relative;
-  height: 60px;
+  height: 80px;
 }
 
 button {
-  padding: 12px 28px;
+  padding: 11px 26px;
   font-size: 15px;
   border-radius: 30px;
   border: none;
   cursor: pointer;
-  transition: transform 0.25s ease;
+  transition: transform 0.2s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 #yes {
@@ -135,43 +119,23 @@ button {
 
 /* Music button */
 .music-btn {
-  margin-top: 12px;
+  margin-top: 10px;
   font-size: 13px;
   background: none;
+  color: #8b5c6b;
   border: none;
-  color: #7a4f5d;
   cursor: pointer;
-}
-
-/* Fireworks */
-.firework {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: gold;
-  border-radius: 50%;
-  animation: explode 1s ease-out forwards;
-}
-@keyframes explode {
-  from { transform: scale(1); opacity: 1; }
-  to { transform: scale(14); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Hearts -->
-<span class="heart" style="left:20%">💖</span>
-<span class="heart" style="left:50%; animation-delay:2s">💗</span>
-<span class="heart" style="left:75%; animation-delay:4s">💕</span>
-
-<!-- Music -->
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3a0b0c1b60.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card">
+<div class="card" id="card">
 
   <h1>My Love 💕</h1>
 
@@ -179,13 +143,6 @@ button {
     <img src="photo1.jpg" class="active">
     <img src="photo2.jpg">
     <img src="photo3.jpg">
-    <img src="photo4.jpg">
-    <img src="photo5.jpg">
-    <img src="photo6.jpg">
-    <img src="photo7.jpg">
-    <img src="photo8.jpg">
-    <img src="photo9.jpg">
-    <img src="photo10.jpg">
   </div>
 
   <div class="message">
@@ -196,18 +153,17 @@ button {
 
   <div class="countdown" id="countdown"></div>
 
-  <div class="buttons" id="btnArea">
+  <div class="buttons" id="buttonArea">
     <button id="yes" onclick="sayYes()">Yes, always 💍</button>
     <button id="no" onmouseover="moveNo()">No 🙈</button>
   </div>
 
-  <button class="music-btn" onclick="playMusic()">🎵 Tap to play music</button>
-
+  <button class="music-btn" onclick="startMusic()">🎵 Tap to play music</button>
 </div>
 
 <script>
-/* MUSIC — 100% reliable */
-function playMusic() {
+/* Music — RELIABLE */
+function startMusic() {
   const music = document.getElementById("bgMusic");
   music.play();
 }
@@ -231,24 +187,16 @@ setInterval(() => {
     days > 0 ? `⏳ ${days} days until our forever begins` : `💍 Today is our forever`;
 }, 1000);
 
-/* NO button — hover shift, stable */
-let toggle = false;
+/* NO button stays inside card */
 function moveNo() {
   const btn = document.getElementById("no");
-  toggle = !toggle;
-  btn.style.transform = toggle ? "translateX(-90px)" : "translateX(0)";
-}
+  const area = document.getElementById("buttonArea");
 
-/* Fireworks */
-function fireworks() {
-  for (let i = 0; i < 18; i++) {
-    const fw = document.createElement("div");
-    fw.className = "firework";
-    fw.style.left = Math.random() * window.innerWidth + "px";
-    fw.style.top = Math.random() * window.innerHeight + "px";
-    document.body.appendChild(fw);
-    setTimeout(() => fw.remove(), 1000);
-  }
+  const maxX = area.clientWidth - btn.offsetWidth;
+  const maxY = area.clientHeight - btn.offsetHeight;
+
+  btn.style.left = Math.random() * maxX + "px";
+  btn.style.top = Math.random() * maxY + "px";
 }
 
 /* YES */
@@ -257,12 +205,11 @@ function sayYes() {
   <div style="
     height:100vh;
     display:flex;
-    flex-direction:column;
     justify-content:center;
     align-items:center;
+    flex-direction:column;
     background:linear-gradient(135deg,#f8cdda,#d88fa3);
-    text-align:center;
-    animation: zoom 1s ease;">
+    text-align:center;">
     <h1 style="font-family:Playfair Display; font-size:42px; color:white;">
       She said YES 💖✨
     </h1>
@@ -270,7 +217,6 @@ function sayYes() {
       My forever begins with you.
     </p>
   </div>`;
-  setInterval(fireworks, 600);
 }
 </script>
 
