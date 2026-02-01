@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be Mine Forever 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #ff9a9e, #ff4d6d);
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.6;
+  animation: floatUp 6s infinite ease-in;
+}
+@keyframes floatUp {
+  0% { transform: translateY(100vh) scale(0.8); opacity: 0; }
+  50% { opacity: 0.9; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(14px);
+  padding: 38px 32px;
+  border-radius: 28px;
+  max-width: 360px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  margin-bottom: 18px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* Buttons */
+button {
+  font-size: 16px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  margin: 10px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+}
+
+#yes {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  color: white;
+}
+
+#no {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  color: white;
+  position: absolute;
+}
+
+/* Glow effect */
+.glow {
+  animation: glow 2s infinite alternate;
+}
+@keyframes glow {
+  from { text-shadow: 0 0 10px #ffd6e0; }
+  to { text-shadow: 0 0 25px #ffffff; }
+}
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<!-- Floating hearts -->
+<span class="heart" style="left:5%">💖</span>
+<span class="heart" style="left:20%; animation-delay:1s">💘</span>
+<span class="heart" style="left:40%; animation-delay:2s">💕</span>
+<span class="heart" style="left:60%; animation-delay:3s">💞</span>
+<span class="heart" style="left:80%; animation-delay:4s">❤️</span>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3a0b0c1b60.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <h1 class="glow">Hey My Love 💕</h1>
+  <p>
+    Somewhere between every laugh, every fight,
+    and every heartbeat… I found HOME in you.<br><br>
+Will you marry me and choose us, every single day? 🌹
+  </p>
+
+  <button id="yes" onclick="sayYes()">Yes, always 💍</button>
+  <button id="no" onmouseover="moveNo()">No 🙈</button>
+</div>
+
+<script>
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    document.getElementById("bgMusic").play();
+    musicStarted = true;
+  }
+}
+
+/* YES celebration */
+function sayYes() {
+  document.body.innerHTML = `
+  <div style="
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background:radial-gradient(circle at top,#ff9a9e,#ff4d6d);
+    color:white;
+    font-family:'Playfair Display', serif;
+    text-align:center;">
+    
+    <h1 style="font-size:42px;">HE SAID YES 💘🎉</h1>
+    <p style="font-family:Poppins; font-size:18px; max-width:320px;">
+      My forever begins with you 🥹❤️<br>
+      I promise to love you endlessly.
+    </p>
+    
+    <div id="confetti"></div>
+  </div>
+  `;
+
+  // Confetti effect
+  for (let i = 0; i < 120; i++) {
+    const confetti = document.createElement("div");
+    confetti.innerHTML = "🎉";
+    confetti.style.position = "fixed";
+    confetti.style.left = Math.random() * window.innerWidth + "px";
+    confetti.style.top = "-20px";
+    confetti.style.fontSize = "20px";
+    confetti.style.animation = "fall 3s linear";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+/* No button runs away */
+function moveNo() {
+  const button = document.getElementById("no");
+  const x = Math.random() * (window.innerWidth - 140);
+  const y = Math.random() * (window.innerHeight - 80);
+  button.style.left = x + "px";
+  button.style.top = y + "px";
+}
+
+/* Confetti animation */
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes fall {
+  from { transform: translateY(0); opacity:1; }
+  to { transform: translateY(100vh); opacity:0; }
+}`;
+document.head.appendChild(style);
+</script>
+
+</body>
+</html>
