@@ -113,8 +113,7 @@ button:hover {
   background: #c75c6c;
   color: white;
   position: absolute;
-  right: 0;
-  top: 0;
+  transition: top 0.4s ease, left 0.4s ease;
 }
 
 /* Music button */
@@ -194,17 +193,22 @@ setInterval(() => {
     days > 0 ? `⏳ ${days} days until our forever begins` : `💍 Today is our forever`;
 }, 1000);
 
-/* NO button stays inside card */
+
+  <script>
 function moveNo() {
   const btn = document.getElementById("no");
-  const area = document.getElementById("buttonArea");
 
-  const maxX = area.clientWidth - btn.offsetWidth;
-  const maxY = area.clientHeight - btn.offsetHeight;
+  const padding = 20;
+  const maxX = window.innerWidth - btn.offsetWidth - padding;
+  const maxY = window.innerHeight - btn.offsetHeight - padding;
 
-  btn.style.left = Math.random() * maxX + "px";
-  btn.style.top = Math.random() * maxY + "px";
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
 }
+</script>
 
 /* YES */
 function sayYes() {
