@@ -10,68 +10,75 @@
 
 <style>
 :root {
-  --blush: #f8cdda;
-  --rose: #d88fa3;
+  --bg1: #f8cdda;
+  --bg2: #d88fa3;
+  --card1: #fff6ee;
+  --card2: #f3c8d6;
   --gold: #e6c98f;
-  --white: #ffffff;
 }
 
 body {
   margin: 0;
   height: 100vh;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, var(--blush), var(--rose));
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--white);
   overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.6;
+  animation: float 7s infinite ease-in;
+}
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: translateY(-10vh); opacity: 0; }
 }
 
 /* Card */
 .card {
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(14px);
-  border-radius: 32px;
-  padding: 38px 32px;
-  max-width: 370px;
+  background: linear-gradient(145deg, var(--card1), var(--card2));
+  border-radius: 34px;
+  padding: 40px 32px;
+  max-width: 380px;
   text-align: center;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
+  box-shadow: 0 35px 70px rgba(0,0,0,0.35);
   animation: fadeUp 1.6s ease;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
+  from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
   font-family: 'Playfair Display', serif;
   font-size: 32px;
-  letter-spacing: 1px;
+  color: #5a3e2b;
   margin-bottom: 14px;
-  color: #fffaf0;
 }
 
-/* Romantic message */
 .message {
   font-family: 'Allura', cursive;
   font-size: 22px;
   line-height: 1.85;
-  letter-spacing: 0.5px;
+  color: #6a3f4d;
   margin-bottom: 24px;
-  color: #fffaf5;
-  text-shadow: 0 0 8px rgba(255,255,255,0.25);
 }
 
 /* Carousel */
 .carousel {
-  position: relative;
   width: 100%;
   height: 190px;
   border-radius: 22px;
   overflow: hidden;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 .carousel img {
   width: 100%;
@@ -81,7 +88,7 @@ h1 {
 }
 .carousel img.active {
   display: block;
-  animation: fade 1.5s;
+  animation: fade 1.4s;
 }
 @keyframes fade {
   from { opacity: 0; }
@@ -91,9 +98,8 @@ h1 {
 /* Countdown */
 .countdown {
   font-size: 14px;
+  color: #6a3f4d;
   margin-bottom: 22px;
-  color: #fff6e5;
-  letter-spacing: 0.6px;
 }
 
 /* Buttons */
@@ -109,7 +115,6 @@ button {
 
 button:hover {
   transform: scale(1.08);
-  box-shadow: 0 12px 22px rgba(0,0,0,0.35);
 }
 
 #yes {
@@ -122,20 +127,7 @@ button:hover {
   background: #c75c6c;
   color: white;
   position: absolute;
-  transition: top 0.4s ease, left 0.4s ease;
-}
-
-/* Floating hearts */
-.heart {
-  position: absolute;
-  font-size: 20px;
-  animation: float 7s infinite ease-in;
-  opacity: 0.6;
-}
-@keyframes float {
-  0% { transform: translateY(100vh); opacity: 0; }
-  50% { opacity: 0.8; }
-  100% { transform: translateY(-10vh); opacity: 0; }
+  transition: left 0.4s ease, top 0.4s ease;
 }
 
 /* Music button */
@@ -151,18 +143,32 @@ button:hover {
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
+
+/* Fireworks */
+.firework {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: gold;
+  border-radius: 50%;
+  animation: explode 1s ease-out forwards;
+}
+@keyframes explode {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(15); opacity: 0; }
+}
 </style>
 </head>
 
 <body onclick="startMusic()">
 
-<!-- Floating hearts -->
-<span class="heart" style="left:12%">💖</span>
+<!-- Hearts -->
+<span class="heart" style="left:15%">💖</span>
 <span class="heart" style="left:45%; animation-delay:2s">💗</span>
 <span class="heart" style="left:75%; animation-delay:4s">💕</span>
 
-<!-- Background Music -->
-<audio id="bgMusic" loop>
+<!-- Music -->
+<audio id="bgMusic" loop preload="auto">
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3a0b0c1b60.mp3" type="audio/mpeg">
 </audio>
 
@@ -172,7 +178,6 @@ button:hover {
 
   <h1>My Love 💕</h1>
 
-  <!-- Photo carousel -->
   <div class="carousel">
     <img src="photo1.jpg" class="active">
     <img src="photo2.jpg">
@@ -191,32 +196,33 @@ button:hover {
   <button id="no" onmouseover="moveNo()">No 🙈</button>
 
   <div style="font-size:12px; opacity:0.7; margin-top:10px;">
-    🔊 Tap anywhere for music
+    🔊 Tap anywhere or the music button
   </div>
 
 </div>
 
 <script>
-/* Music */
+/* MUSIC – bulletproof */
 let musicStarted = false;
 function startMusic() {
   if (!musicStarted) {
-    document.getElementById("bgMusic").play();
+    const music = document.getElementById("bgMusic");
+    music.play().catch(()=>{});
     musicStarted = true;
   }
 }
 
 /* Carousel */
 let index = 0;
-const images = document.querySelectorAll(".carousel img");
+const imgs = document.querySelectorAll(".carousel img");
 setInterval(() => {
-  images[index].classList.remove("active");
-  index = (index + 1) % images.length;
-  images[index].classList.add("active");
+  imgs[index].classList.remove("active");
+  index = (index + 1) % imgs.length;
+  imgs[index].classList.add("active");
 }, 3000);
 
 /* Countdown */
-const targetDate = new Date("2026-02-14").getTime(); // CHANGE DATE
+const targetDate = new Date("2026-02-14").getTime();
 setInterval(() => {
   const now = new Date().getTime();
   const diff = targetDate - now;
@@ -225,7 +231,19 @@ setInterval(() => {
     days > 0 ? `⏳ ${days} days until our forever begins` : `💍 Today is our forever`;
 }, 1000);
 
-/* Yes action */
+/* Fireworks */
+function fireworks() {
+  for (let i = 0; i < 25; i++) {
+    const fw = document.createElement("div");
+    fw.className = "firework";
+    fw.style.left = Math.random() * window.innerWidth + "px";
+    fw.style.top = Math.random() * window.innerHeight + "px";
+    document.body.appendChild(fw);
+    setTimeout(() => fw.remove(), 1000);
+  }
+}
+
+/* YES */
 function sayYes() {
   document.body.innerHTML = `
   <div style="
@@ -235,24 +253,24 @@ function sayYes() {
     justify-content:center;
     align-items:center;
     background:linear-gradient(135deg,#f8cdda,#d88fa3);
-    color:white;
-    text-align:center;
-    font-family:'Playfair Display', serif;">
-    <h1 style="font-size:42px;">She said YES 💖✨</h1>
-    <p style="font-family:Poppins; font-size:18px; max-width:320px;">
+    animation: zoom 1s ease;
+    text-align:center;">
+    <h1 style="font-family:Playfair Display; font-size:42px; color:white;">
+      She said YES 💖✨
+    </h1>
+    <p style="font-family:Poppins; font-size:18px; color:white; max-width:320px;">
       My forever begins with you.<br>I love you endlessly.
     </p>
   </div>`;
+  setInterval(fireworks, 600);
 }
 
-/* No button movement (never disappears) */
+/* NO button */
 function moveNo() {
   const btn = document.getElementById("no");
-  const padding = 20;
-  const maxX = window.innerWidth - btn.offsetWidth - padding;
-  const maxY = window.innerHeight - btn.offsetHeight - padding;
-  btn.style.left = Math.random() * maxX + "px";
-  btn.style.top = Math.random() * maxY + "px";
+  const pad = 20;
+  btn.style.left = Math.random() * (window.innerWidth - btn.offsetWidth - pad) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - btn.offsetHeight - pad) + "px";
 }
 </script>
 
