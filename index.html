@@ -5,151 +5,126 @@
 <title>Be Mine Forever 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg1: #f8cdda;
-  --bg2: #d88fa3;
-  --card-bg: #fff8f3;
-  --gold: #e6c98f;
-  --rose-text: #6a3f4d;
-}
-
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, var(--bg1), var(--bg2));
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Poppins', sans-serif;
+body{
+  margin:0;
+  height:100vh;
+  background:linear-gradient(135deg,#f8cdda,#d88fa3);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Poppins,sans-serif;
+  overflow:hidden;
 }
 
 /* Card */
-.card {
-  position: relative;
-  background: var(--card-bg);
-  border-radius: 30px;
-  padding: 36px 28px;
-  width: 340px;
-  text-align: center;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-  animation: fadeUp 1.2s ease;
+.card{
+  position:relative;
+  width:360px;
+  padding:38px 32px;
+  background:linear-gradient(145deg,#fff8f3,#f3c8d6);
+  border-radius:32px;
+  text-align:center;
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  z-index:2;
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: translateY(0); }
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  color:#5a3e2b;
 }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px;
-  color: #5a3e2b;
-  margin-bottom: 12px;
-}
-
-/* Message */
-.message {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  line-height: 1.7;
-  color: var(--rose-text);
-  margin-bottom: 20px;
-}
-
-/* Carousel */
-.carousel {
-  width: 100%;
-  height: 180px;
-  border-radius: 18px;
-  overflow: hidden;
-  margin-bottom: 18px;
-}
-.carousel img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  display: none;
-}
-.carousel img.active {
-  display: block;
-}
-
-/* Countdown */
-.countdown {
-  font-size: 14px;
-  color: #8b5c6b;
-  margin-bottom: 18px;
+.message{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;
+  line-height:1.8;
+  color:#6a3f4d;
+  margin:22px 0;
 }
 
 /* Buttons */
-.buttons {
-  position: relative;
-  height: 80px;
+.buttons{
+  position:relative;
+  width:100%;
+  height:80px;
 }
 
-button {
-  padding: 11px 26px;
-  font-size: 15px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+button{
+  padding:12px 28px;
+  border-radius:30px;
+  border:none;
+  font-size:15px;
+  cursor:pointer;
 }
 
-button:hover {
-  transform: scale(1.05);
+#yes{
+  background:linear-gradient(135deg,#e6c98f,#f7e7b4);
+  color:#5a3e2b;
 }
 
-#yes {
-  background: linear-gradient(135deg, var(--gold), #f7e7b4);
-  color: #5a3e2b;
+#no{
+  background:#c75c6c;
+  color:white;
+  position:absolute;
+  left:220px;
+  top:10px;
 }
 
-#no {
-  background: #c75c6c;
-  color: white;
-  position: absolute;
-  transition: top 0.4s ease, left 0.4s ease;
+/* YES overlay */
+#yesOverlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,rgba(248,205,218,.95),rgba(216,143,163,.95));
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:50;
+  animation:fadeZoom .8s ease;
 }
 
-/* Music button */
-.music-btn {
-  margin-top: 10px;
-  font-size: 13px;
-  background: none;
-  color: #8b5c6b;
-  border: none;
-  cursor: pointer;
+@keyframes fadeZoom{
+  from{opacity:0;transform:scale(.9)}
+  to{opacity:1;transform:scale(1)}
+}
+
+#yesOverlay h1{
+  font-family:'Playfair Display',serif;
+  font-size:44px;
+  color:white;
+}
+
+#yesOverlay p{
+  font-family:Poppins;
+  font-size:18px;
+  color:white;
+}
+
+/* Fireworks */
+.firework{
+  position:fixed;
+  width:8px;
+  height:8px;
+  background:gold;
+  border-radius:50%;
+  z-index:100;
+  animation:explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+  from{transform:scale(1);opacity:1}
+  to{transform:scale(18);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_3a0b0c1b60.mp3" type="audio/mpeg">
-</audio>
-
 <div class="card" id="card">
-
   <h1>My Love 💕</h1>
-
-  <div class="carousel">
-    <img src="photo1.jpg" class="active">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
-    <img src="photo5.jpg">
-    <img src="photo6.jpg">
-    <img src="photo7.jpg">
-    <img src="photo8.jpg">
-    <img src="photo9.jpg">
-    <img src="photo10.jpg">
-  </div>
 
   <div class="message">
     Somewhere between every laugh, every fight,<br>
@@ -157,77 +132,53 @@ button:hover {
     Will you marry me and choose us, every single day?
   </div>
 
-  <div class="countdown" id="countdown"></div>
-
-  <div class="buttons" id="buttonArea">
+  <div class="buttons" id="btnArea">
     <button id="yes" onclick="sayYes()">Yes, always 💍</button>
     <button id="no" onmouseover="moveNo()">No 🙈</button>
   </div>
+</div>
 
-
+<!-- YES SCREEN -->
+<div id="yesOverlay">
+  <h1>She said YES 💖✨</h1>
+  <p>My forever begins with you.</p>
 </div>
 
 <script>
-/* Music — RELIABLE */
-function startMusic() {
-  const music = document.getElementById("bgMusic");
-  music.play();
+/* NO button – RANDOM but bounded */
+function moveNo(){
+  const btn=document.getElementById("no");
+  const area=document.getElementById("btnArea");
+
+  const maxX=area.clientWidth-btn.offsetWidth;
+  const maxY=area.clientHeight-btn.offsetHeight;
+
+  const x=Math.random()*maxX;
+  const y=Math.random()*maxY;
+
+  btn.style.left=x+"px";
+  btn.style.top=y+"px";
 }
 
-/* Carousel */
-let index = 0;
-const imgs = document.querySelectorAll(".carousel img");
-setInterval(() => {
-  imgs[index].classList.remove("active");
-  index = (index + 1) % imgs.length;
-  imgs[index].classList.add("active");
-}, 3000);
-
-/* Countdown */
-const targetDate = new Date("2026-02-08").getTime();
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = targetDate - now;
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  document.getElementById("countdown").innerText =
-    days > 0 ? `⏳ ${days} days until our forever begins` : `💍 Today is our forever`;
-}, 1000);
-
-
-<script>
-function moveNo() {
-  const btn = document.getElementById("no");
-
-  const padding = 20;
-  const maxX = window.innerWidth - btn.offsetWidth - padding;
-  const maxY = window.innerHeight - btn.offsetHeight - padding;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  btn.style.left = x + "px";
-  btn.style.top = y + "px";
+/* Fireworks */
+function fireworkBurst(){
+  for(let i=0;i<25;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*window.innerWidth+"px";
+    f.style.top=Math.random()*window.innerHeight+"px";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  }
 }
-</script>
 
-/* YES */
-function sayYes() {
-  document.body.innerHTML = `
-  <div style="
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background:linear-gradient(135deg,#f8cdda,#d88fa3);
-    text-align:center;">
-    <h1 style="font-family:Playfair Display; font-size:42px; color:white;">
-      KOSHAL said YES 💖✨
-    </h1>
-    <p style="font-family:Poppins; font-size:18px; color:white;">
-      My forever begins with you.
-    </p>
-  </div>`;
+/* YES click */
+function sayYes(){
+  document.getElementById("yesOverlay").style.display="flex";
+
+  // continuous fireworks for 5 seconds
+  const interval=setInterval(fireworkBurst,600);
+  setTimeout(()=>clearInterval(interval),5000);
 }
 </script>
 
